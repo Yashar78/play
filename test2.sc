@@ -25,7 +25,12 @@ import play.api.libs.json._
 } """)
 
 
-implicit val locationWrites = new Writes[Location] {
+
+
+
+
+
+  implicit val locationWrites = new Writes[Location] {
   def writes(location: Location) = Json.obj(
     "lat" -> location.lat,
     "long" -> location.long

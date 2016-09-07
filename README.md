@@ -22,7 +22,7 @@ curl -H "Content-Type: application/json" -X POST -d '{"name":"london","populatio
 curl -X "POST" http://localhost:9000/cities/add\?name\=Paris&population\=2244000
 ```
 curl -H "Content-Type: application/json" -X POST -d '{"lat":12.0, "long": 85.39}' http://localhost:9000/locations/
-http://localhost:9000/locations/add\?lat\=23.3\&long\=12.4
+curl -X "POST" http://localhost:9000/locations/add\?lat\=23.3\&long\=12.4
 ## Add some cities in bulk
 
 ```
@@ -73,3 +73,4 @@ curl -H "Content-Type: application/json" -X POST -d '[{"name": "pepe"}]' http://
 curl http://localhost:9000/persons?name=jason
 ```
 
+curl -H "Content-Type: application/json" -X POST -d  '{ "name": "Watership Down", "location": {"lat": 51.235685, "long": -1.309197}}'  http://localhost:9000/places/

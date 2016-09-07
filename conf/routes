@@ -13,3 +13,7 @@ GET      /persons                   controllers.PersonController.findByName(name
 
 POST     /locations/add              controllers.LocationController.create(lat: Double, long: Double)
 POST     /locations/                 controllers.LocationController.createFromJson
+
+POST      /places/                   controllers.PlaceController.createFromJson
+POST      /places/add                controllers.PlaceController.create(name: String, location:Location)
+

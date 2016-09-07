@@ -17,4 +17,5 @@ resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
 
 scalacOptions in ThisBuild ++= Seq("-feature", "-language:postfixOps")
 
+routesImport ++=Seq("models._")
 fork in run := true

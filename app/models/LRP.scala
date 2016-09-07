@@ -7,7 +7,7 @@ package models
 
 case class Location(lat: Double, long: Double)
 case class Resident(name: String, age: Int, role: Option[String])
-case class Place(name: String, location: Location, residents: Seq[Resident])
+case class Place(name: String, location: Location) //, residents: Seq[Resident])
 
 import play.api.libs.json._
 import play.api.libs.functional.syntax._
@@ -28,6 +28,7 @@ object Location {
 }
 
 object Resident {
+  /*
   implicit val residentWrites: Writes[Resident] = (
     (JsPath \ "name").write[String] and
       (JsPath \ "age").write[Int] and
@@ -39,11 +40,12 @@ object Resident {
       (JsPath \ "age").read[Int] and
       (JsPath \ "role").readNullable[String]
     )(Resident.apply _)
-
+*/
   implicit val fomatter = Json.format[Resident]
 }
 
 object Place {
+  /*
   implicit val placeWrites: Writes[Place] = (
     (JsPath \ "name").write[String] and
       (JsPath \ "location").write[Location] and
@@ -55,10 +57,8 @@ object Place {
       (JsPath \ "location").read[Location] and
       (JsPath \ "residents").read[Seq[Resident]]
     )(Place.apply _)
-
+*/
   implicit val fomatter = Json.format[Place]
-
-
 }
 
 
