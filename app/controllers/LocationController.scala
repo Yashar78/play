@@ -2,18 +2,16 @@ package controllers
 
 import javax.inject._
 
-import models.City
+//import models.City
 import play.api.Logger
 import play.api.libs.json._
 import play.api.mvc._
 import play.modules.reactivemongo._
-import reactivemongo.api.ReadPreference
-import reactivemongo.play.json._
 import reactivemongo.play.json.collection._
 import utils.Errors
 import models._
 import scala.concurrent.{ExecutionContext, Future}
-
+import play.modules.reactivemongo.json._
 
 /**
   * Simple controller that directly stores and retrieves [models.City] instances into a MongoDB Collection
@@ -36,8 +34,8 @@ class LocationController @Inject()(val reactiveMongoApi: ReactiveMongoApi)(impli
     Json.fromJson[Location](request.body) match {
       case JsSuccess(location, _) =>
         for {
-          cities <- locationFuture
-          lastError <- cities.insert(location)
+          locations <- locationFuture
+          lastError <- locations.insert(location)
         } yield {
           Logger.debug(s"Successfully inserted with LastError: $lastError")
           Created("Created 1 location")

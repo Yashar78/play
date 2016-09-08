@@ -21,9 +21,27 @@ object test3 {
   } ]
 }
 """)
+  val latPath = JsPath \ "location" \ "lat"
+
+  // Recursive path
+  val namesPath = JsPath \\ "name"
+
+  // Indexed path
+  val firstResidentPath = (JsPath \ "residents")(0)
+
+  val longPath = __ \ "location" \ "long"
+
+  val nameReads: Reads[String] = (JsPath \ "name").read[String]
+
+  val nameResult: JsResult[String] = json.validate[String](nameReads)
+
+  nameResult match {
+    case s: JsSuccess[String] => println("Name: " + s.get)
+    case e: JsError => println("Errors: " + JsError.toJson(e).toString())
+  }
 
 
-
+  /*
   val place = Place(
     "Watership Down",
     Location(51.235685, -1.309197),
@@ -49,7 +67,6 @@ object test3 {
     case s: JsSuccess[Place] => println("Name========: " + s.get.name)
     case e: JsError => println("Errors: " + JsError.toJson(e).toString())
   }
-
-
+*/
 
 }

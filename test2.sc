@@ -146,6 +146,16 @@ placeResult match {
 }                                                 //> Name: JsSuccess(Place(Watership Down,Location(51.235685,-1.309197),List(Res
                                                   //| ident(Fiver,4,None), Resident(Bigwig,6,Some(Owsla)))),)
 
+  placeResult.fold(
+    errors => {
+      BadRequest(Json.obj("status" ->"KO", "message" -> JsError.toJson(errors)))
+    },
+    place => {
+      Place.save(place)
+      Ok(Json.obj("status" ->"OK", "message" -> ("Place '"+place.name+"' saved.") ))
+    }
+  )
+
 val residentResult: JsResult[Resident] = (json \ "residents")(1).validate[Resident]
                                                   //> residentResult  : play.api.libs.json.JsResult[test2.Resident] = JsSuccess(R
                                                   //| esident(Bigwig,6,Some(Owsla)),)

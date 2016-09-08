@@ -22,10 +22,10 @@ class PlaceController @Inject()(val reactiveMongoApi: ReactiveMongoApi)(implicit
 
   def placeFuture: Future[JSONCollection] = database.map(_.collection[JSONCollection]("place"))
 
-  def create(name: String, location: Location) = Action.async {
+  def create(name: String, location: Location, residents: Seq[Resident] ) = Action.async {
     for {
       places <- placeFuture
-      lastError <- places.insert(Place(name, location))
+      lastError <- places.insert(Place(name, location, residents))
     } yield
       Ok("Mongo LastError: %s".format(lastError))
   }

@@ -74,3 +74,7 @@ curl http://localhost:9000/persons?name=jason
 ```
 
 curl -H "Content-Type: application/json" -X POST -d  '{ "name": "Watership Down", "location": {"lat": 51.235685, "long": -1.309197}}'  http://localhost:9000/places/
+
+
+
+curl --include --request POST --header "Content-type: application/json" --data '{"name":"Nuthanger Farm","location":{"lat" : 51.244031, "long" : -1.263224}}' http://localhost:9000/places
