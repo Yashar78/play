@@ -91,5 +91,5 @@ object user {
     )(unlift(User.unapply))
 
   implicit val userFormat: Format[User] = Format(userReads, userWrites)
-
 }
+

@@ -7,9 +7,10 @@ import play.api.Logger
 import play.api.libs.json._
 import play.api.mvc._
 import play.modules.reactivemongo._
+import reactivemongo.api.ReadPreference
 import reactivemongo.play.json.collection._
 import utils.Errors
-
+import play.modules.reactivemongo.json._
 import scala.concurrent.{ExecutionContext, Future}
 
 
@@ -43,6 +44,16 @@ class PlaceController @Inject()(val reactiveMongoApi: ReactiveMongoApi)(implicit
       case JsError(errors) =>
         Future.successful(BadRequest("Could not build a place from the json provided. " + Errors.show(errors)))
     }
+  }
+
+  def findPlace(name: String) = Action.async {
+    val futurePlacesList: Future[List[Place]] = placeFuture.flatMap{
+        _.find(Json.obj("name" -> name)).
+          cursor[Place](ReadPreference.primary).
+          collect[List]()
+    }
+    futurePlacesList.map { places =>
+      Ok(Json.prettyPrint(Json.toJson(places))) }
   }
 
 

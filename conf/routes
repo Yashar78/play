@@ -15,5 +15,5 @@ GET      /persons                   controllers.PersonController.findByName(name
 POST     /locations/                 controllers.LocationController.createFromJson
 
 POST      /places/                   controllers.PlaceController.createFromJson
-#POST      /places/add                controllers.PlaceController.create(name: String, location:Location)
-
+#POST     /places/add                controllers.PlaceController.create(name: String, location:Location)
+GET       /places                    controllers.PlaceController.findPlace(name: String)
